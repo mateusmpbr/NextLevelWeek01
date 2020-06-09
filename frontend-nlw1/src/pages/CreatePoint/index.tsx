@@ -50,7 +50,7 @@ const CreatePoint = () => {
     }, [])
 
     useEffect(() => {
-        axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+        axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
             .then(response => {
                 const ufInitials = response.data.map(uf => uf.sigla)
                 setUfs(ufInitials)
@@ -62,7 +62,7 @@ const CreatePoint = () => {
             return;
         }
 
-        axios.get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/distritos`)
+        axios.get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/distritos?orderBy=nome`)
             .then(response => {
                 const cityNames = response.data.map(city => city.nome)
                 setCities(cityNames)
